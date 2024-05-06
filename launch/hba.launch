@@ -1,0 +1,14 @@
+<launch>
+  <node pkg="hba" type="hba" name="hba" output="screen">
+    <param name="data_path" type="string" value="/home/pengll/catkin_ws/src/FAST-LIVO/data_output/log_test/"/>
+    <param name="total_layer_num" type="int" value="3"/>   <!--set 3 层-->
+    <param name="pcd_name_fill_num" type="int" value="5"/> <!--set 5 for kitti07 and 0 for park 与文件名字有关的 无用-->  
+    <param name="thread_num" type="int" value="16"/>       <!-- cup 线程数-->
+  </node>
+
+  <arg name="rviz" default="0"/>
+  <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz"
+    args="-d $(find hba)/rviz_cfg/rosbag.rviz" />
+  </group>
+</launch>
